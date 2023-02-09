@@ -1,30 +1,31 @@
-import { ContactForm } from '../components/ContactForm/ContactForm';
-import { Filter } from '../components/Filter/Filter';
-import { ContactList } from '../components/ContactList/ContactList';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/contacts/operations.contacts';
+import { token } from 'http/http';
+import { Contacts } from 'pages/Contacts/Contacts';
+import { Login } from 'pages/Login/Login';
+import { Register } from 'pages/Register/Register';
 import { useEffect } from 'react';
-import { Loader } from './Loader/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { getUser } from 'redux/user/operaction.user';
+import { Header } from './Header/Header';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const search = useSelector(state => state.filter.search);
+  const tokenValue = useSelector(state => state.auth.token);
+  const { name, email } = useSelector(state => state.user);
   useEffect(() => {
-    dispatch(fetchContacts(search));
-  }, [search, dispatch]);
-
-  const { items, isLoading, error } = useSelector(state => state.contacts);
-
-  if (error) return <p>Error</p>;
-
+    if (tokenValue && !name && !email) {
+      token.set(tokenValue);
+      dispatch(getUser());
+    }
+  }, [token]);
   return (
     <>
-      <h2>Phonebook</h2>
-      <ContactForm contacts={items} />
-      <h2>Contacts</h2>
-      <Filter></Filter>
-
-      {isLoading ? <Loader /> : <ContactList contacts={items} />}
+      <Header />
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/contacts" element={<Contacts />} />
+      </Routes>
     </>
   );
 };
