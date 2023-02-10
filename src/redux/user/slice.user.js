@@ -1,3 +1,4 @@
+import { login, logout, register } from 'redux/auth/operactions.auth';
 import { userInitialState } from './initialState.user';
 import { getUser } from './operaction.user';
 
@@ -18,6 +19,28 @@ const userSlice = createSlice({
     [getUser.rejected](state, { payload }) {
       state.isLoading = false;
       state.error = payload;
+    },
+    [register.pending](state) {
+      state.isLoading = true;
+    },
+    [register.fulfilled](state, { payload }) {
+      state.isLoading = false;
+      state.name = payload.user.name;
+      state.email = payload.user.email;
+    },
+    [register.rejected](state, { payload }) {
+      state.isLoading = false;
+      state.error = payload;
+    },
+
+    [login.fulfilled](state, { payload }) {
+      state.isLoading = false;
+      state.name = payload.user.name;
+      state.email = payload.user.email;
+    },
+
+    [logout.fulfilled]() {
+      return userInitialState;
     },
   },
 });

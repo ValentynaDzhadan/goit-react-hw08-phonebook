@@ -3,8 +3,18 @@ import { authReducer } from './auth/slice.auth';
 import { contactsReducer } from './contacts/slice.contacts';
 import { filterReducer } from './filter/slice.filter';
 import { userReducer } from './user/slice.user';
-import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
 const authPersistConfig = {
   key: 'auth',
@@ -22,6 +32,11 @@ export const store = configureStore({
     user: userReducer,
   },
   // devTools: process.env.NODE_ENV === 'development',
-  middleware: getDefaultMiddleware => getDefaultMiddleware(),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 export const persistor = persistStore(store);

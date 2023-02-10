@@ -17,6 +17,13 @@ export const loginUser = async body => {
   return data;
 };
 
+export const logoutUser = async () => {
+  const { data } = await privateApi.post(
+    'https://connections-api.herokuapp.com/users/logout'
+  );
+  return data;
+};
+
 export const getCurrentUser = async () => {
   const { data } = await privateApi.get(
     'https://connections-api.herokuapp.com/users/current'

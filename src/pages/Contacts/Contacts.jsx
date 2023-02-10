@@ -5,6 +5,7 @@ import { fetchContacts } from 'redux/contacts/operations.contacts';
 import { ContactList } from 'components/ContactList/ContactList';
 import { Filter } from 'components/Filter/Filter';
 import { ContactForm } from 'components/ContactForm/ContactForm';
+import { UserMenu } from 'components/UserMenu/UserMenu';
 
 export const Contacts = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export const Contacts = () => {
 
   return (
     <>
+      <UserMenu />
       <h2>Phonebook</h2>
       <ContactForm contacts={items} />
       <h2>Contacts</h2>
