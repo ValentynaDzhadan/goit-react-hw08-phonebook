@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { privateApi, publicApi } from 'http/http';
 
 export const registerUser = async body => {

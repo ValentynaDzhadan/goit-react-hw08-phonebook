@@ -10,7 +10,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState } from 'react';
-import { registerUser } from 'services/users.service';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operactions.auth';
 

@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations.contacts';
 import { useState } from 'react';
