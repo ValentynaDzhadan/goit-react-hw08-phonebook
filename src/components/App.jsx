@@ -16,7 +16,7 @@ export const App = () => {
   const { name, email } = useSelector(state => state.user);
   useEffect(() => {
     if (tokenValue && !name && !email) {
-      // token.set(tokenValue);
+      token.set(tokenValue);
       dispatch(getUser());
     }
   }, [dispatch, email, name, tokenValue]);
