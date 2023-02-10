@@ -19,7 +19,7 @@ export const App = () => {
       // token.set(tokenValue);
       dispatch(getUser());
     }
-  }, [token, dispatch, email, name, tokenValue]);
+  }, [dispatch, email, name, tokenValue]);
   return (
     <>
       <Header />
