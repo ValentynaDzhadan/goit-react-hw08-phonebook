@@ -7,41 +7,40 @@ const { createSlice } = require('@reduxjs/toolkit');
 const userSlice = createSlice({
   name: 'auth',
   initialState: userInitialState,
-  extraReducers: {
-    [getUser.pending](state) {
-      state.isLoading = true;
-    },
-    [getUser.fulfilled](state, { payload }) {
-      state.isLoading = false;
-      state.name = payload.name;
-      state.email = payload.email;
-    },
-    [getUser.rejected](state, { payload }) {
-      state.isLoading = false;
-      state.error = payload;
-    },
-    [register.pending](state) {
-      state.isLoading = true;
-    },
-    [register.fulfilled](state, { payload }) {
-      state.isLoading = false;
-      state.name = payload.user.name;
-      state.email = payload.user.email;
-    },
-    [register.rejected](state, { payload }) {
-      state.isLoading = false;
-      state.error = payload;
-    },
-
-    [login.fulfilled](state, { payload }) {
-      state.isLoading = false;
-      state.name = payload.user.name;
-      state.email = payload.user.email;
-    },
-
-    [logout.fulfilled]() {
-      return userInitialState;
-    },
+  extraReducers: builder => {
+    builder
+      .addCase(getUser.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.name = payload.name;
+        state.email = payload.email;
+      })
+      .addCase(getUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(register.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(register.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.name = payload.user.name;
+        state.email = payload.user.email;
+      })
+      .addCase(register.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(login.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.name = payload.user.name;
+        state.email = payload.user.email;
+      })
+      .addCase(logout.fulfilled, () => {
+        return userInitialState;
+      });
   },
 });
 
