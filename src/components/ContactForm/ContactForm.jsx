@@ -21,9 +21,8 @@ export const ContactForm = ({ contacts }) => {
       alert(`${name} is already in contacts`);
     } else {
       const newContact = {
-        id: uuidv4(),
         name: name,
-        phone: phone,
+        number: phone,
       };
       dispatch(addContact(newContact));
     }

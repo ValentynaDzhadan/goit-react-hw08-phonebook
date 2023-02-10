@@ -3,6 +3,7 @@ import { changeFilterAction } from 'redux/filter/slice.filter';
 
 export const Filter = () => {
   const value = useSelector(state => state.filter.search);
+
   const dispatch = useDispatch();
 
   const handleChange = e => {

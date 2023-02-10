@@ -12,6 +12,7 @@ import { PublicRoute } from './PublicRoute/PublicRoute';
 
 export const App = () => {
   const dispatch = useDispatch();
+  const isAuth = useSelector(state => state.auth.isAuth);
   const tokenValue = useSelector(state => state.auth.token);
   const { name, email } = useSelector(state => state.user);
   useEffect(() => {
@@ -24,12 +25,13 @@ export const App = () => {
     <>
       <Header />
       <Routes>
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/contacts" element={<Contacts />} />
+        </Route>
+
         <Route path="/" element={<PublicRoute />}>
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-        </Route>
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path="/contacts" element={<Contacts />} />
         </Route>
       </Routes>
     </>

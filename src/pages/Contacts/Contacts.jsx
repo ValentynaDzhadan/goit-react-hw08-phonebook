@@ -9,10 +9,12 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 
 export const Contacts = () => {
   const dispatch = useDispatch();
-  const search = useSelector(state => state.filter.search);
+  const isAuth = useSelector(state => state.auth.isAuth);
   useEffect(() => {
-    dispatch(fetchContacts(search));
-  }, [search, dispatch]);
+    if (isAuth) {
+      dispatch(fetchContacts());
+    }
+  }, [isAuth, dispatch]);
 
   const { items, isLoading, error } = useSelector(state => state.contacts);
 

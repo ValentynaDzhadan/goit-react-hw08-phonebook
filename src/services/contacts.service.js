@@ -1,25 +1,22 @@
-import axios from 'axios';
+import { privateApi } from 'http/http';
 
-export const getContacts = async search => {
-  const { data } = await axios.get(
-    'https://63e44c414474903105e95619.mockapi.io/contacts/contacts',
-    {
-      params: { search },
-    }
+export const getContacts = async () => {
+  const { data } = await privateApi.get(
+    'https://connections-api.herokuapp.com/contacts'
   );
   return data;
 };
 
 export const addContactService = async body => {
-  const { data } = await axios.post(
-    'https://63e44c414474903105e95619.mockapi.io/contacts/contacts',
+  const { data } = await privateApi.post(
+    'https://connections-api.herokuapp.com/contacts',
     body
   );
   return data;
 };
 
 export const deleteContactService = id => {
-  return axios.delete(
-    'https://63e44c414474903105e95619.mockapi.io/contacts/contacts/' + id
+  return privateApi.delete(
+    'https://connections-api.herokuapp.com/contacts/' + id
   );
 };
